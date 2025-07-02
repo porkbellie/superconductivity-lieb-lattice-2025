@@ -1,5 +1,6 @@
 # superconductivity-lieb-lattice-2025
-### Ellie Han, Peter Riseborough
+Ellie Han, Peter Riseborough
+
 ## Description
 
 Project updates solely from 2025
