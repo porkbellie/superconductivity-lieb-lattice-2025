@@ -11,7 +11,7 @@ A short Python algorithm to detect abrupt jumps and use a comparison of slopes l
 
 Intended for easy translation into Fortran
 
-##### 2025.06.30
+##### 2025.06.30 
 
 Potential flaw occurs when the slopes are equal which is possible when w=0
 
