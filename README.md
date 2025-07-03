@@ -20,3 +20,7 @@ Next steps: take derivative of smooth parts of curve to give change in DOS due t
 You can see the two delta functions outside the continuum straddling w=3, and the delta function of weight -2 at w=0. This corresponds to the destruction of two flat band states at w=0.
 
 The change in the density of states also exhibits delta functions associated with the steps in the non-interacting density of states at w==/-1 and w=+/- 2. The jumps in the non-interacting density of states can be considered as the edges of sub-bands, in which case one is removing states from the edge of the sub-band and pushing them outside the sub-band.
+
+### integrate_smooth
+
+An algorithm that inputs the array phi_smooth from detect_phase_jump and returns the derivative of the smooth parts of the curve without removing the delta functions. 

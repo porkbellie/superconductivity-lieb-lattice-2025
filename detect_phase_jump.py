@@ -24,3 +24,7 @@ def detect_phase_jump(phi, cutoff):
         phi_smooth[i] = phi[i] + shift
 
 return phi_smooth
+
+def integrate_smooth(phi_smooth):
+    
+    
