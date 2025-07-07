@@ -32,15 +32,15 @@ return phi_smooth
 # inputs: omega, phi_smooth
 # output: derivative 
 def derivative_smooth(omega, phi_smooth):
-    n = len(phi_smooth) #length of phi_smooth
-    derivative = np.zeros(n) #array of length n
+    n = len(phi_smooth) # length of phi_smooth
+    derivative = np.zeros(n) # array of length n
 
-    derivative[0] = (phi_smooth[1] - phi_smooth[0]) / (omega[1] - omega[0]) #forward diff at start
+    derivative[0] = (phi_smooth[1] - phi_smooth[0]) / (omega[1] - omega[0]) # forward diff at start
 
-    for i in range(1, n-1): #central diff
+    for i in range(1, n-1): # central diff
         derivative[i] = (phi_smooth[i + 1] - phi_smooth[i - 1]) / (omega[i + 1] - omega[i - 1])
 
-    derivative[n - 1] = (phi_smooth[n - 1] - phi_smooth[n - 2]) / (omega[n - 1] - omega[n - 2]) #backward diff at end
+    derivative[n - 1] = (phi_smooth[n - 1] - phi_smooth[n - 2]) / (omega[n - 1] - omega[n - 2]) # backward diff at end
 
 return derivative
     
