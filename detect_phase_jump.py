@@ -7,13 +7,13 @@ import matplotlib.pyplot as plt
 # output: phi_smooth
 def detect_phase_jump(phi, cutoff):
 
-    n = length of phi
-    phi_smooth = array of length n
+    n = len(phi)
+    phi_smooth = np.zeros(n)
     shift = 0
 
     phi_smooth[0] = phi[0]
 
-    for i from 1 to n - 2:
+    for i in range(1,n - 2):
         jump = phi[i] - phi[i - 1]
         if abs(jump) > cutoff:
             slope_before = phi[i] - phi[i - 1]
