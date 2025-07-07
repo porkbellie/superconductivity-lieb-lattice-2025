@@ -21,6 +21,6 @@ You can see the two delta functions outside the continuum straddling w=3, and th
 
 The change in the density of states also exhibits delta functions associated with the steps in the non-interacting density of states at w==/-1 and w=+/- 2. The jumps in the non-interacting density of states can be considered as the edges of sub-bands, in which case one is removing states from the edge of the sub-band and pushing them outside the sub-band.
 
-### integrate_smooth
+### derivative_smooth
 
-An algorithm that inputs the array phi_smooth from detect_phase_jump and returns the derivative of the smooth parts of the curve without removing the delta functions. 
+An algorithm that inputs the array phi_smooth from detect_phase_jump and returns the derivative of the smooth parts of the curve without removing the delta functions. There are two inputs: omega and phi_smooth. It returns the derivatives as an array. 
