@@ -26,10 +26,12 @@ def smooth_derivative(omega, phi_smooth, cutoff=10):
         forward = abs(phi_smooth[i + 1] - phi_smooth[i])
         backward = abs(phi_smooth[i] - phi_smooth[i - 1])
 
-        if forward < cutoff and backward < cutoff:
-            derivative[i] = (phi_smooth[i + 1] - phi_smooth[i - 1]) / (omega[i + 1] - omega[i - 1])
-        else:
-            derivative[i] = (phi_smooth[i] - phi_smooth[i - 1]) / (omega[i] - omega[i - 1])
+        derivative[i] = (phi_smooth[i + 1] - phi_smooth[i - 1]) / (omega[i + 1] - omega[i - 1])
+
+        #if forward < cutoff and backward < cutoff:
+            #derivative[i] = (phi_smooth[i + 1] - phi_smooth[i - 1]) / (omega[i + 1] - omega[i - 1])
+        #else:
+            #derivative[i] = (phi_smooth[i] - phi_smooth[i - 1]) / (omega[i] - omega[i - 1])
 
     derivative[n - 1] = (phi_smooth[n - 1] - phi_smooth[n - 2]) / (omega[n - 1] - omega[n - 2])
 
