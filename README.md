@@ -21,6 +21,10 @@ You can see the two delta functions outside the continuum straddling w=3, and th
 
 The change in the density of states also exhibits delta functions associated with the steps in the non-interacting density of states at w==/-1 and w=+/- 2. The jumps in the non-interacting density of states can be considered as the edges of sub-bands, in which case one is removing states from the edge of the sub-band and pushing them outside the sub-band.
 
-### derivative_smooth
+### smooth_derivative
 
-An algorithm that inputs the array phi_smooth from detect_phase_jump and returns the derivative of the smooth parts of the curve without removing the delta functions. There are two inputs: omega and phi_smooth. It returns the derivatives as an array. 
+An algorithm that inputs the array phi_smooth from detect_phase_jump and returns the derivative of the smooth parts of the curve without removing the delta functions. There are three inputs: omega, phi_smooth, cutoff. It returns the derivatives as an array. 
+
+This file contains a comparison of smoothing methods. The unsmoothed is produced by a simple numerical diffentiation approximation using the smoothed phi values. The first smoothed is produced by the smooth_derivative function. The second is produced by implementing a Savitzkey-Golay filter. This digital filter uses the method of least linear squares to fit adjacent clusters of data points to a low degree polynomial which means that it is able to smooth while preserving features like the delta functions. It's mostly used to smooth out noisy data in signal processing or spectroscopy, but I thought it might work here too. This is included in the SciPy package. Its source code can be found there.
+
+I found that the Savitzky-Golay filter is smoother than the algorithm I wrote, but I think mine is still a good approximation.
