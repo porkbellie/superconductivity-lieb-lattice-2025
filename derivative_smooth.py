@@ -16,17 +16,17 @@ mid_derivative = (phi_smooth[1:] - phi_smooth[:-1]) / (omega[1:] - omega[:-1])
 # SMOOTH_DERIVATIVE: computes smoothed numerical derivative of phases while preserving delta functions 
 # inputs: omega, phi_smooth, cutoff
 # outputs: derivative
-def smooth_derivative(omega, phi_smooth, jump_cutoff=0.2):
+def smooth_derivative(omega, phi_smooth, cutoff=10):
     n = len(phi_smooth)
     derivative = np.zeros(n)
 
     derivative[0] = (phi_smooth[1] - phi_smooth[0]) / (omega[1] - omega[0])
 
     for i in range(1, n - 1):
-        forward_jump = abs(phi_smooth[i + 1] - phi_smooth[i])
-        backward_jump = abs(phi_smooth[i] - phi_smooth[i - 1])
+        forward = abs(phi_smooth[i + 1] - phi_smooth[i])
+        backward = abs(phi_smooth[i] - phi_smooth[i - 1])
 
-        if forward_jump < jump_cutoff and backward_jump < jump_cutoff:
+        if forward < cutoff and backward < cutoff:
             derivative[i] = (phi_smooth[i + 1] - phi_smooth[i - 1]) / (omega[i + 1] - omega[i - 1])
         else:
             derivative[i] = (phi_smooth[i] - phi_smooth[i - 1]) / (omega[i] - omega[i - 1])
