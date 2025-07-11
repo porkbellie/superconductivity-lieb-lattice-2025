@@ -28,3 +28,11 @@ An algorithm that inputs the array phi_smooth from detect_phase_jump and returns
 This file contains a comparison of smoothing methods. The unsmoothed is produced by a simple numerical diffentiation approximation using the smoothed phi values. The first smoothed is produced by the smooth_derivative function. The second is produced by implementing a Savitzkey-Golay filter. This digital filter uses the method of least linear squares to fit adjacent clusters of data points to a low degree polynomial which means that it is able to smooth while preserving features like the delta functions. It's mostly used to smooth out noisy data in signal processing or spectroscopy, but I thought it might work here too. This is included in the SciPy package. Its source code can be found there.
 
 I found that the Savitzky-Golay filter is smoother than the algorithm I wrote, but I think mine is still a good approximation.
+
+I had to re-create a venv for this project but I'm confused as to where the one I had been using went. Anyways, don't forget to conda activate environment. The venv is lieb-env.
+
+Dr. Riseborough was very happy with this work, both the smooth_derivative algorithm and the S-G algorithm (well, the discovery/implementation of it). This pleased me. 
+
+## Future To Do
+
+- Write adaptive S-G program to refine S-G filtering. 
