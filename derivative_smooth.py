@@ -55,10 +55,59 @@ polyorder = 3
 delta = np.mean(np.diff(omega))
 savgol_derivative = savgol_filter(phi_smooth, window_length, polyorder, deriv=1, delta=delta)
 
+# adaptive S-G filter
+def adaptive_savgol_derivative(omega, phi, base_window=11, polyorder=3, jump_cutoff=10):
+    n = len(phi)
+    deriv = np.zeros(n)
+
+    for i in range(n):
+        if i == 0 or i == n - 1:
+            deriv[i] = (phi[min(i + 1, n - 1)] - phi[max(i - 1, 0)]) / (omega[min(i + 1, n - 1)] - omega[max(i - 1, 0)])
+            continue
+
+        jump_fwd = abs(phi[min(i + 1, n - 1)] - phi[i])
+        jump_bwd = abs(phi[i] - phi[max(i - 1, 0)])
+        jump_size = max(jump_fwd, jump_bwd)
+
+        if jump_size > jump_cutoff:
+            window = max(5, base_window // 3)
+        else:
+            window = base_window
+
+        window = min(window, i, n - i - 1)
+        if window % 2 == 0:
+            window -= 1
+        if window < polyorder + 2:
+            window = polyorder + 2
+            if window % 2 == 0:
+                window += 1
+
+        half = window // 2
+        start = max(0, i - half)
+        end = min(n, i + half + 1)
+
+        if end - start < window:
+            deriv[i] = (phi[i] - phi[i - 1]) / (omega[i] - omega[i - 1])
+            continue
+
+        local_phi = phi[start:end]
+        local_omega = omega[start:end]
+        delta = np.mean(np.diff(local_omega))
+        try:
+            local_deriv = savgol_filter(local_phi, window_length=len(local_phi), polyorder=polyorder, deriv=1, delta=delta)
+            deriv[i] = local_deriv[i - start]
+        except Exception:
+            deriv[i] = (phi[i] - phi[i - 1]) / (omega[i] - omega[i - 1])
+
+    return deriv
+
+adaptive_deriv = adaptive_savgol_derivative(omega, phi_smooth)
+
 plt.figure(figsize=(10, 5))
 plt.plot(mid_omega, mid_derivative, label="excel", linewidth=2)
 plt.plot(mid_omega, smooth_deriv_mid, label="smooth_derivative", linewidth=2)
-plt.plot(omega, savgol_derivative, label="Savitsky-Golay", linewidth=2)
+#plt.plot(omega, savgol_derivative, label="Savitsky-Golay", linewidth=2)
+plt.plot(omega, adaptive_deriv, label="adaptive S-G", linewidth=2)
 plt.title("Smoothing Comparison")
 plt.legend()
 plt.grid(True)
