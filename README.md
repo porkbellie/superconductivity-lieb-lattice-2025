@@ -1,6 +1,4 @@
 # superconductivity-lieb-lattice-2025
-Ellie Han, Peter Riseborough
-
 ## Description
 
 Project updates solely from 2025
@@ -35,4 +33,4 @@ Dr. Riseborough was very happy with this work, both the smooth_derivative algori
 
 ## Future To Do
 
-- Write adaptive S-G program to refine S-G filtering. 
+- Write adaptive S-G program to refine filtering. 
